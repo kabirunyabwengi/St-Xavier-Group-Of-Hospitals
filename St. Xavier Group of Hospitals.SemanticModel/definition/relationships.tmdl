@@ -1,0 +1,5 @@
+relationship 58c884c5-f453-456f-ba5e-648d9280a706
+	joinOnDateBehavior: datePartOnly
+	fromColumn: Patients_Admissions.'Admission Date'
+	toColumn: LocalDateTable_2f1a43cd-1b74-4883-8829-1632e0195fb4.Date
+

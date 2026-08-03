@@ -1,0 +1,85 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.11.0/schema.json",
+  "name": "25dfb039370d116490a9",
+  "position": {
+    "x": 948.95956208318876,
+    "y": 457.90062063914269,
+    "z": 1000,
+    "height": 262.10863112447475,
+    "width": 262.10863112447475,
+    "tabOrder": 1000
+  },
+  "visual": {
+    "visualType": "donutChart",
+    "query": {
+      "queryState": {
+        "Category": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Patients_Admissions"
+                    }
+                  },
+                  "Property": "Readmission Flag"
+                }
+              },
+              "queryRef": "Patients_Admissions.Readmission Flag",
+              "nativeQueryRef": "Count of Readmission Flag",
+              "active": true
+            }
+          ]
+        },
+        "Y": {
+          "projections": [
+            {
+              "field": {
+                "Aggregation": {
+                  "Expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Patients_Admissions"
+                        }
+                      },
+                      "Property": "Readmission Flag"
+                    }
+                  },
+                  "Function": 5
+                }
+              },
+              "queryRef": "CountNonNull(Patients_Admissions.Readmission Flag)",
+              "nativeQueryRef": "Count of Readmission Flag1"
+            }
+          ]
+        }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Aggregation": {
+                "Expression": {
+                  "Column": {
+                    "Expression": {
+                      "SourceRef": {
+                        "Entity": "Patients_Admissions"
+                      }
+                    },
+                    "Property": "Readmission Flag"
+                  }
+                },
+                "Function": 5
+              }
+            },
+            "direction": "Descending"
+          }
+        ],
+        "isDefaultSort": true
+      }
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

@@ -1,0 +1,85 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.11.0/schema.json",
+  "name": "7754a535c2ea0eeda6b0",
+  "position": {
+    "x": 396.32088200146489,
+    "y": 154.7388304228827,
+    "z": 0,
+    "height": 227.371342662195,
+    "width": 356.84669056705604,
+    "tabOrder": 0
+  },
+  "visual": {
+    "visualType": "donutChart",
+    "query": {
+      "queryState": {
+        "Category": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Patients_Admissions"
+                    }
+                  },
+                  "Property": "Payer Type"
+                }
+              },
+              "queryRef": "Patients_Admissions.Payer Type",
+              "nativeQueryRef": "Payer Type",
+              "active": true
+            }
+          ]
+        },
+        "Y": {
+          "projections": [
+            {
+              "field": {
+                "Aggregation": {
+                  "Expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Patients_Admissions"
+                        }
+                      },
+                      "Property": "Payer Type"
+                    }
+                  },
+                  "Function": 5
+                }
+              },
+              "queryRef": "CountNonNull(Patients_Admissions.Payer Type)",
+              "nativeQueryRef": "Count of Payer Type"
+            }
+          ]
+        }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Aggregation": {
+                "Expression": {
+                  "Column": {
+                    "Expression": {
+                      "SourceRef": {
+                        "Entity": "Patients_Admissions"
+                      }
+                    },
+                    "Property": "Payer Type"
+                  }
+                },
+                "Function": 5
+              }
+            },
+            "direction": "Descending"
+          }
+        ],
+        "isDefaultSort": true
+      }
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

@@ -1,0 +1,128 @@
+table Patients_Admissions
+	lineageTag: a2fcb324-73e9-4092-8d8b-dc8a444076bb
+
+	column VisitID
+		dataType: string
+		lineageTag: 33c56b23-fc5a-4067-a8c1-7a13d499f84a
+		summarizeBy: none
+		sourceColumn: VisitID
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Admission Date'
+		dataType: dateTime
+		formatString: dd/mm/yyyy
+		lineageTag: f2d87c64-4abf-4abd-8459-f402f42faadb
+		dataCategory: Uncategorized
+		summarizeBy: count
+		sourceColumn: Admission Date
+
+		variation Variation
+			isDefault
+			relationship: 58c884c5-f453-456f-ba5e-648d9280a706
+			defaultHierarchy: LocalDateTable_2f1a43cd-1b74-4883-8829-1632e0195fb4.'Date Hierarchy'
+
+		changedProperty = DataType
+
+		annotation SummarizationSetBy = User
+
+		annotation UnderlyingDateTimeDataType = Date
+
+		annotation PBI_FormatHint = {"isDateTimeCustom":true}
+
+	column 'Discharge Date'
+		dataType: string
+		lineageTag: 8bcd2546-7f56-45c3-99d9-db0660c8a89a
+		summarizeBy: none
+		sourceColumn: Discharge Date
+
+		annotation SummarizationSetBy = Automatic
+
+	column Department
+		dataType: string
+		lineageTag: 590aed6e-77bb-4e69-9bbe-ad000845e4f0
+		summarizeBy: none
+		sourceColumn: Department
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Patient Type'
+		dataType: string
+		lineageTag: aa58ac31-ec96-4077-b521-da2713558b8a
+		summarizeBy: none
+		sourceColumn: Patient Type
+
+		annotation SummarizationSetBy = Automatic
+
+	column Branch
+		dataType: string
+		lineageTag: b8a09acf-8396-4632-a698-b20bf3f5b51e
+		summarizeBy: none
+		sourceColumn: Branch
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Patient Age'
+		dataType: string
+		lineageTag: 093e8ff7-512c-47f3-a27e-24dc9810bc53
+		summarizeBy: none
+		sourceColumn: Patient Age
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Patient Gender'
+		dataType: string
+		lineageTag: b989c375-658e-4a66-89d9-a84ee16a4fe1
+		summarizeBy: none
+		sourceColumn: Patient Gender
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Length of Stay (Days)'
+		dataType: string
+		lineageTag: a045448b-78f2-4ba7-a138-20029bca8e64
+		summarizeBy: none
+		sourceColumn: Length of Stay (Days)
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Payer Type'
+		dataType: string
+		lineageTag: 2e35007c-79e8-47fc-b2a8-b1730774190e
+		summarizeBy: none
+		sourceColumn: Payer Type
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Readmission Flag'
+		dataType: string
+		lineageTag: 6dc64b13-2023-4a77-8535-d9b0ab00d681
+		summarizeBy: none
+		sourceColumn: Readmission Flag
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Bill Amount (KES)'
+		dataType: int64
+		formatString: #,0
+		lineageTag: bf5d4733-4486-4601-94a9-7c0777f4f674
+		summarizeBy: count
+		sourceColumn: Bill Amount (KES)
+
+		annotation SummarizationSetBy = User
+
+	partition Patients_Admissions = m
+		mode: import
+		source =
+				let
+				    Source = Excel.Workbook(File.Contents("C:\Data\For BI.xlsx"), null, true),
+				    Patients_Admissions_Sheet = Source{[Item="Patients_Admissions",Kind="Sheet"]}[Data],
+				    #"Promoted Headers" = Table.PromoteHeaders(Patients_Admissions_Sheet, [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"Bill Amount (KES)", Int64.Type}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

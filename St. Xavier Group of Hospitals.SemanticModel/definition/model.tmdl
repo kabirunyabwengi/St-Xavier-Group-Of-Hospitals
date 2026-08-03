@@ -1,0 +1,21 @@
+model Model
+	culture: en-US
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	sourceQueryCulture: en-US
+	valueFilterBehavior: independent
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+annotation __PBI_TimeIntelligenceEnabled = 1
+
+annotation PBI_QueryOrder = ["Patients_Admissions"]
+
+annotation PBI_ProTooling = ["DevMode"]
+
+ref table Patients_Admissions
+ref table DateTableTemplate_e95759ec-9194-4bfc-abec-30ca5fde5d98
+ref table LocalDateTable_2f1a43cd-1b74-4883-8829-1632e0195fb4
+
+ref cultureInfo en-US
+
